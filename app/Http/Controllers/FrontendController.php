@@ -19,7 +19,7 @@ class FrontendController extends Controller
     }
 
     public function product(){
-        $products=Product::latest()->paginate(6);
+        $products=Product::latest()->paginate(9);
         return view('frontend.pages.product.product',compact('products'));
     }
     public function category(){
