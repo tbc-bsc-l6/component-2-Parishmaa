@@ -12,6 +12,13 @@
         </div>
         <div>
             <a class="btn btn-primary" href="{{ route('product.create') }}" role="button" style="color:pink"> New Product </a>
+            <div>
+                <select name="sort_by_price" id="sort_id" onchange="sortChange()">
+                    <option value="">Choose sort list..</option>
+                    <option value="highlow">High-Low</option>
+                    <option value="lowhigh">Low-High</option>
+                </select>
+            </div>
         </div>
         <table class="table table-striped table-bordered table-hover">
             <thead class="thead-dark">
@@ -41,10 +48,12 @@
                         <td>{{ $product->availableSize }}</td>
                         <td>{{ $product->availableColor }}</td>
                         <td>
-                            <img src="{{ $product->hasMedia('') ? $product->getMedia('')[0]->getFullUrl() : '' }}" alt="" srcset="" width="100" class="img-thumbnail">
+                            <img src="{{ $product->hasMedia('') ? $product->getMedia('')[0]->getFullUrl() : '' }}"
+                                alt="" srcset="" width="100" class="img-thumbnail">
                         </td>
                         <td>
-                            <a href="{{ route('product.edit', ['product' => $product]) }}" class="btn btn-sm btn-primary">Edit</a>
+                            <a href="{{ route('product.edit', ['product' => $product]) }}"
+                                class="btn btn-sm btn-primary">Edit</a>
                         </td>
                         <td>
                             <form method="post" action="{{ route('product.destroy', ['product' => $product]) }}">
@@ -58,28 +67,59 @@
             </tbody>
         </table>
     </div>
+    <script>
+        function sortChange() {
+            let selectedOption = document.getElementById('sort_id').value;
+            if (selectedOption == "" || selectedOption == null || selectedOption == undefined) {
+
+            } else {
+                const url = `{{ url('/sort_product') }}/${selectedOption}`;
+                // window.location.href = url;
+                $.ajax({
+                    type: 'POST',
+                    url: '{!! route('sort_product') !!}',
+                    data: formData,
+                    dataType: 'json',
+                    success: function(response) {
+                        // Handle the response message
+                        $('#cf-response-message').text(response.message);
+                    },
+                    error: function(xhr, status, error) {
+                        // Handle errors if needed
+                        console.error(xhr.responseText);
+                    }
+                });
+            }
+
+        }
+    </script>
 @endsection
 
 <style>
     .table {
         margin-top: 20px;
     }
+
     .table thead th {
         background-color: #ff6c84;
         color: #000000;
         border-bottom: 2px solid #ff6c84;
     }
+
     .table tbody tr:hover {
         background-color: #ffe6e6;
     }
+
     .table td {
         vertical-align: middle;
     }
+
     .img-thumbnail {
         border: none;
         border-radius: 5px;
         padding: 5px;
     }
+
     .btn-sm {
         padding: 5px 10px;
         font-size: 12px;

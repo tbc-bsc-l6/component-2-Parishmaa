@@ -19,7 +19,11 @@ class LoginController extends Controller
     | to conveniently provide its functionality to your applications.
     |
     */
-   
+    protected function authenticated(Request $request, $user)
+    {
+        // method implementation
+        return redirect()-> route('product.index');
+    }
 
     use AuthenticatesUsers;
 
@@ -38,6 +42,5 @@ class LoginController extends Controller
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
-
     }
 }

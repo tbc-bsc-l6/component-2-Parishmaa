@@ -50,17 +50,13 @@
 
                             </tbody>
                         </table>
-                        @if (count($cartLists)>0)
-                             <form method="POST" action="{{ route('checkout') }}">
+                        <form method="POST" action="{{ route('checkout') }}">
                             @csrf
                             <button type="submit" id="checkout-btn">Checkout</button>
                         </form>
-                        @endif
-                       
                     </div>
                 </div>
             </div>
-            
         </div>
     </div>
 @endsection

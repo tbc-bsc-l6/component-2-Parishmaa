@@ -30,4 +30,13 @@ class FrontendController extends Controller
         $deals=Deal::latest()->paginate(9);
         return view('frontend.pages.welcome',compact('deals'));
     }
+    public function search(Request $request){
+        $data=$request->all();
+        $products=Product::where('name','like','%'.$data['product'].'%')->get();
+        // dd($search);
+        // $products = Product::inRandomOrder()->take(3)->get();
+        $deals = Deal::inRandomOrder()->take(3)->get();
+        // dd(compact('products')); 
+        return view('frontend.pages.welcome',compact('products','deals'));
+    }
 }  

@@ -40,7 +40,7 @@
         </div>
         <div class="form-group">            
             <label>Image</label>
-            <input type="file" name="img" placeholder="File" class="form-control-file" />
+            <input type="file" name="img" placeholder="File" class="form-control-file" required/>
         </div>   
         {{-- <div class="col-md-12 mt-2">
             <div id="img-box"> --}}

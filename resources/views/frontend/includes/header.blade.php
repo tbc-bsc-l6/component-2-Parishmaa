@@ -15,7 +15,7 @@
 
     <nav class="navbar navbar-expand-lg bg-body-tertiary">
         <div class="container-fluid">
-            <a class="navbar-brand" href="{{route('home')}}">E-Commerce</a>
+            <a class="navbar-brand" href="{{ route('home') }}">E-Commerce</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
                 aria-label="Toggle navigation">
@@ -24,26 +24,34 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="{{route('home')}}">Home</a>
+                        <a class="nav-link active" aria-current="page" href="{{ route('home') }}">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{route('productpage')}}">Product</a>
+                        <a class="nav-link" href="{{ route('productpage') }}">Product</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{route('categorypage')}}">Category</a>
+                        <a class="nav-link" href="{{ route('categorypage') }}">Category</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" {{-- href="{{route('dealpage')}}" --}}>Deals</a>
                     </li>
-                
-                    <a class="nav-link" href="{{route('cart')}}">
-                        <i class="fa-solid fa-cart-shopping"></i> Cart( {{cartCount()}})
+
+                    <a class="nav-link" href="{{ route('cart') }}">
+                        <i class="fa-solid fa-cart-shopping"></i> Cart( {{ cartCount() }})
                     </a>
                 </ul>
-                @if (!Auth::check())
-                <a href="{{route('login')}}">Login</a>
-                @endif
-                
+                <div class="d-flex justify-content-between">
+
+                    <form action="{{ route('searchproduct') }}" method="post">
+                        @csrf
+                        <input type="text" value="" name="product" placeholder="Search product.">
+                        {{-- <i class="fa fa-search"></i> --}}
+                    </form>
+                    @if (!Auth::check())
+                        <a href="{{ route('login') }}">Login</a>
+                    @endif
+                </div>
+
             </div>
         </div>
     </nav>

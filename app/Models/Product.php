@@ -30,7 +30,7 @@ class Product extends Model implements HasMedia
         return $this->belongsTo(Category::class,"category_id", "id");
     }
 
-    protected $appends = ['amount_with_currency'];  //accessor
+    protected $appends = ['amount_with_currency'];
     
     public function getAmountWithCurrencyAttribute()
     {
