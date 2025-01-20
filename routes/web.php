@@ -9,17 +9,30 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\AddtoCartController;
 use App\Http\Controllers\RoleController;
-
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\OrderController;
 Route::controller(FrontendController::class)->group(function () {
     Route::get('/', 'welcome')->name('home');
     Route::get('/product', 'product')->name('productpage');
+    Route::get('/products/filter', [ProductController::class, 'filterProducts'])->name('products.filter');
     Route::get('/category', 'category')->name('categorypage');
     Route::get('/deal', 'deal')->name('dealpage');
     Route::post('/search', 'search')->name('searchproduct');
+    Route::post('/checkout', [OrderController::class, 'checkout'])->name('checkout');
+    Route::get('/profile/orders', [OrderController::class, 'show'])->name('profile'); // User's orders view
+
+});
+Route::middleware('guest')->group(function () {
+    Route::get('/login', [AuthController::class, 'login'])->name('login');
+    Route::get('/register', [AuthController::class, 'register'])->name('register');
 });
 
-Route::any('/logout', [LoginController::class, 'logout'])->name('logout');
-
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [UserController::class, 'show'])->name('profile');
+    Route::post('/profile/update-email', [UserController::class, 'updateEmail'])->name('profile.update-email');
+    Route::post('/profile/update-password', [UserController::class, 'updatePassword'])->name('profile.update-password');
+    Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
+});
 Auth::routes();
 Route::get('/dashboard', [ProductController::class, 'index'])->name('product.index');
 Route::group(['prefix' => '/product'], function () {
@@ -36,6 +49,10 @@ Route::group(['prefix' => '/product'], function () {
     Route::get('/cart-details', [ProductController::class, 'cartDetails'])->name('cart-details');
     Route::post('/checkout', [ProductController::class, 'checkout'])->name('checkout');
     Route::post('/sort_product', [ProductController::class, 'sortProduct'])->name('sort_product');
+    Route::middleware(['auth', 'is_admin'])->group(function () {
+        Route::get('/admin/orders', [OrderController::class, 'index'])->name('admin.orders.index');
+        Route::get('/orders', [OrderController::class, 'index'])->name('orders.index'); // Admin orders view
+    });
 
 
 

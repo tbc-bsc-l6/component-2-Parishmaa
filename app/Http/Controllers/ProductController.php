@@ -145,7 +145,20 @@ class ProductController extends Controller
             return redirect()->route('login');
         }
     }
+    
+    public function filterProducts(Request $request)
+{
+    $query = Product::query();
 
+    if ($request->filled('price_range')) {
+        [$min, $max] = explode('-', $request->price_range);
+        $query->whereBetween('price', [(float) $min, (float) $max]);
+    }
+
+    $products = $query->get();
+
+    return view('frontend.pages.product.product', compact('products'));
+}
 
     public function addToCart(Request $request)
     {

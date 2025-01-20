@@ -1,8 +1,9 @@
 <?php
 
 namespace Database\Seeders;
-use Illuminate\Support\Facades\DB;
+
 use Illuminate\Database\Seeder;
+use Spatie\Permission\Models\Role;
 
 class RoleSeeder extends Seeder
 {
@@ -13,22 +14,11 @@ class RoleSeeder extends Seeder
      */
     public function run()
     {
-        $roles= [
-             [
-                 'name' => 'admin',
-                 'guard_name'=>'web'
-             ],
-             [
-                 'name' => 'user',
-                 'guard_name'=>'web'
-             ]
-         ];
-        foreach ($roles as $key => $role) {
-            # code...
-            DB::table('roles')->insert([
-                'name'=> $role['name'],
-                'guard_name'=> $role['guard_name'],
-            ]);
+        $roles = ['admin', 'user'];
+
+        foreach ($roles as $role) {
+            // Use Spatie's Role model to create roles
+            Role::firstOrCreate(['name' => $role, 'guard_name' => 'web']);
         }
     }
 }

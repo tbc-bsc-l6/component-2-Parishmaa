@@ -51,6 +51,11 @@
                             </a>
                         </li> --}}
                         <li>
+                        <a href="{{ route('admin.orders.index') }}" class="nav-link align-middle px-0">
+                            <i class="fs-4 bi-table"></i> <span class="ms-1 d-none d-sm-inline">Orders</span>
+                        </a>
+                        </li>
+                        <li>
                             <a href="{{ route('role.index') }}" class="nav-link align-middle px-0">
                                 <i class="fs-4 bi-people"></i> <span class="ms-1 d-none d-sm-inline">Role</span>
                             </a>

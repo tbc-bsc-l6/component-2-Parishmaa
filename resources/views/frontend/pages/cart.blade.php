@@ -52,6 +52,7 @@
                         </table>
                         <form method="POST" action="{{ route('checkout') }}">
                             @csrf
+                            <input type="hidden" name="total" value="{{ $totalPrice }}">
                             <button type="submit" id="checkout-btn">Checkout</button>
                         </form>
                     </div>
