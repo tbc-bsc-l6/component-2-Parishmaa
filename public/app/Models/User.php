@@ -51,8 +51,4 @@ class User extends Authenticatable
     {
         return $this->hasMany(Order::class);
     }
-    public function role()
-    {
-        return $this->roles()->first(); // Single role logic
-    }
 }

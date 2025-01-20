@@ -117,18 +117,21 @@
                     @csrf
                     <input type="text" value="" name="product" placeholder="Search product">
                 </form>
+
                 @if (Auth::check())
                 <!-- Dropdown for logged-in users -->
                 <div class="dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         <i class="fa-solid fa-user"></i> {{ Auth::user()->name }}
                     </a>
-                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item d-flex align-items-center" href="{{ route('profile') }}">
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+                        <li>
+                            <a class="dropdown-item d-flex align-items-center" href="{{ route('profile') }}">
                                 <i class="fa-solid fa-user-circle me-2 text-primary"></i> Profile
                             </a>
+                        </li>
                         <li>
-                        <form method="POST" action="{{ route('logout') }}" class="d-inline">
+                            <form method="POST" action="{{ route('logout') }}" class="d-inline">
                                 @csrf
                                 <button type="submit" class="dropdown-item d-flex align-items-center">
                                     <i class="fa-solid fa-sign-out-alt me-2 text-danger"></i> Logout

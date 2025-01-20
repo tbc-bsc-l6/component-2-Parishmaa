@@ -28,8 +28,8 @@
                                             <td>{!! $cartData->product->name ?? 'N/A' !!}</td>
                                             <td>{!! isset($user) ? $user : 'N/A' !!}</td>
                                             <td>{!! $cartData->quantity !!}</td>
-                                            <td>${!! number_format($cartData->product->price, 2) !!}</td>
-                                            <td>${!! number_format($cartData->quantity * $cartData->product->price, 2) !!}</td>
+                                            <td>Rs {!! number_format($cartData->product->price, 2) !!}</td>
+                                            <td>Rs {!! number_format($cartData->quantity * $cartData->product->price, 2) !!}</td>
                                             <td>
 
                                                 <a href="{{ route('remove', $cartData->id) }}">
@@ -43,7 +43,7 @@
                                     @endforeach
                                     <tr>
                                         <td colspan="6" class="text-right">Total Price:</td>
-                                        <td><strong>${!! number_format($totalPrice, 2) !!}</strong></td>
+                                        <td><strong> Rs {!! number_format($totalPrice, 2) !!}</strong></td>
                                     </tr>
                                 @else
                                 No cart data                              @endif

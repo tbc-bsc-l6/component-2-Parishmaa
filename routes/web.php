@@ -7,6 +7,7 @@ use App\Http\Controllers\DealsController;
 use App\Http\Controllers\FrontendController;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\AddtoCartController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
@@ -81,10 +82,10 @@ Route::group(['prefix' => '/deals'], function () {
     Route::delete('/{deals}/destroy', [DealsController::class, 'destroy'])->name('deals.destroy');
     Route::get('/new', [DealsController::class, 'new'])->name('deals.new');
 });
-// Route::get('/role',[RoleController::class, 'index'])->name('role.index');
+
 Route::group(['prefix' => '/role'], function () {
     Route::get('/', [RoleController::class, 'index'])->name('role.index');
     Route::get('/create', [RoleController::class, 'create'])->name('role.create');
     Route::post('/store', [RoleController::class, 'store'])->name('role.store');
-   
+    Route::put('/update-user-role', [RoleController::class, 'updateUserRole'])->name('role.updateUserRole');  // New route
 });

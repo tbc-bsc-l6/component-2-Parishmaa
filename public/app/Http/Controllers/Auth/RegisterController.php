@@ -14,7 +14,7 @@ class RegisterController extends Controller
     use RegistersUsers;
 
     // Where to redirect users after registration
-    protected $redirectTo = '/product.index';
+    protected $redirectTo = RouteServiceProvider::HOME;
 
     public function __construct()
     {
@@ -34,7 +34,6 @@ class RegisterController extends Controller
     // Create the user and assign the "user" role
     protected function create(array $data)
     {
-    
         $user = User::create([
             'name' => $data['name'],
             'email' => $data['email'],

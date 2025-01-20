@@ -12,14 +12,6 @@
         </div>
         <div>
             <a class="btn btn-primary" href="{{ route('product.create') }}" role="button" style="color:pink"> New Product </a>
-            <div>
-                <select name="sort_by_price" id="sort_id" onchange="sortChange()">
-                    <option value="">Choose sort list..</option>
-                    <option value="highlow">High-Low</option>
-                    <option value="lowhigh">Low-High</option>
-                </select>
-            </div>
-        </div>
         <table class="table table-striped table-bordered table-hover">
             <thead class="thead-dark">
                 <tr>
