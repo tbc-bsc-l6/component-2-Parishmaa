@@ -11,14 +11,15 @@ use Illuminate\Http\Request;
 class FrontendController extends Controller
 {
     public function welcome(){
-        $products = Product::inRandomOrder()->take(3)->get();
+        // $products = Product::inRandomOrder()->take(3)->get();
+        $products = Product::inRandomOrder()->take(6)->get();
         $deals = Deal::inRandomOrder()->take(3)->get();
         // dd(compact('products')); 
         return view('frontend.pages.welcome',compact('products','deals'));
     }
 
     public function product(){
-        $products=Product::latest()->paginate(9);
+        $products=Product::latest()->paginate(6);
         return view('frontend.pages.product.product',compact('products'));
     }
     public function category(){
