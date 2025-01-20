@@ -20,7 +20,8 @@ class ProductController extends Controller
 {
     public function index()
     {
-        $products = Product::all();
+        // $products = Product::all();
+        $products = Product::with('media')->get();
         // dd(cartCount());
         return view('backend.product.index', ['products' => $products]);
     }

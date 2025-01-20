@@ -11,8 +11,7 @@ use Illuminate\Http\Request;
 class FrontendController extends Controller
 {
     public function welcome(){
-        // $products = Product::inRandomOrder()->take(3)->get();
-        $products = Product::inRandomOrder()->take(6)->get();
+        $products = Product::inRandomOrder()->take(3)->get();
         $deals = Deal::inRandomOrder()->take(3)->get();
         // dd(compact('products')); 
         return view('frontend.pages.welcome',compact('products','deals'));

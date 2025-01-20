@@ -34,6 +34,7 @@ class RegisterController extends Controller
     // Create the user and assign the "user" role
     protected function create(array $data)
     {
+    
         $user = User::create([
             'name' => $data['name'],
             'email' => $data['email'],

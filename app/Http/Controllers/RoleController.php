@@ -3,8 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
-use App\Models\Role;
 use Illuminate\Http\Request;
+use RealRashid\SweetAlert\Facades\Alert;
+use Spatie\Permission\Models\Role;
 
 class RoleController extends Controller
 {
@@ -29,19 +30,20 @@ class RoleController extends Controller
         return redirect()->route('role.index')->with('success', 'Role assigned successfully!');
     }
 
-    public function update(Request $request, $id)
-    {
-        $request->validate([
-            'role_id' => 'required|exists:roles,id',
-        ]);
+    public function updateUserRole(Request $request){
 
-        $user = User::findOrFail($id);
-        $user->role_id = $request->role_id;
-        $user->save();
+        try {
+            $data=$request->all();
+            $user=User::findOrFail($data['userId']);
+            $role=Role::findOrFail($data['roleId']);
+            $user->syncRoles([$role]);
+            Alert::success('Success', "Role Assigned Successfully.");
+            return redirect()->route('role.index');
+        } catch (\Throwable $th) {
+            Alert::error('Error', $th->getMessage());}
+        }
 
-        return redirect()->route('role.index')->with('success', 'Role updated successfully!');
-    }
-
+    
     public function destroy($id)
     {
         $user = User::findOrFail($id);
